@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 45 20% 98%;
+    --foreground: 150 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 150 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 25% 15%;
+
+    --primary: 150 40% 25%;
+    --primary-foreground: 45 30% 95%;
+
+    --secondary: 150 15% 85%;
+    --secondary-foreground: 150 40% 25%;
+
+    --muted: 45 15% 92%;
+    --muted-foreground: 150 10% 45%;
+
+    --accent: 85 25% 70%;
+    --accent-foreground: 150 40% 25%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 150 15% 88%;
+    --input: 150 15% 88%;
+    --ring: 150 40% 25%;
+
+    /* Nature's Grove Custom Tokens */
+    --forest-deep: 150 50% 20%;
+    --forest-medium: 150 40% 35%;
+    --sage: 150 25% 60%;
+    --earth: 35 25% 45%;
+    --cream: 45 40% 95%;
+    --moss: 120 35% 40%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--forest-deep)), hsl(var(--forest-medium)));
+    --gradient-card: linear-gradient(180deg, hsl(var(--cream)), hsl(150 20% 96%));
+    --gradient-accent: linear-gradient(45deg, hsl(var(--sage)), hsl(var(--accent)));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(var(--forest-deep) / 0.08);
+    --shadow-medium: 0 8px 30px hsl(var(--forest-deep) / 0.12);
+    --shadow-strong: 0 15px 40px hsl(var(--forest-deep) / 0.15);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 150 25% 8%;
+    --foreground: 45 30% 95%;
+
+    --card: 150 25% 10%;
+    --card-foreground: 45 30% 95%;
+
+    --popover: 150 25% 10%;
+    --popover-foreground: 45 30% 95%;
+
+    --primary: 150 40% 70%;
+    --primary-foreground: 150 25% 8%;
+
+    --secondary: 150 20% 18%;
+    --secondary-foreground: 45 30% 95%;
+
+    --muted: 150 20% 18%;
+    --muted-foreground: 150 15% 65%;
+
+    --accent: 85 25% 50%;
+    --accent-foreground: 150 25% 8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 150 20% 18%;
+    --input: 150 20% 18%;
+    --ring: 150 40% 70%;
+
+    /* Dark mode custom tokens */
+    --forest-deep: 150 40% 15%;
+    --forest-medium: 150 30% 25%;
+    --sage: 150 20% 45%;
+    --earth: 35 20% 35%;
+    --cream: 45 25% 12%;
+    --moss: 120 25% 30%;
+    
+    --gradient-hero: linear-gradient(135deg, hsl(var(--forest-deep)), hsl(var(--forest-medium)));
+    --gradient-card: linear-gradient(180deg, hsl(var(--cream)), hsl(150 15% 15%));
+    --gradient-accent: linear-gradient(45deg, hsl(var(--sage)), hsl(var(--accent)));
+    
+    --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.3);
+    --shadow-medium: 0 8px 30px hsl(0 0% 0% / 0.4);
+    --shadow-strong: 0 15px 40px hsl(0 0% 0% / 0.5);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+  
+  /* Typography */
+  .font-heading {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  
+  .font-body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+}
+
+@layer components {
+  /* Hero Section */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  /* Card Variants */
+  .card-nature {
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid hsl(var(--border));
+  }
+  
+  /* Button Variants */
+  .btn-nature {
+    background: hsl(var(--forest-medium));
+    color: hsl(var(--cream));
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-nature:hover {
+    background: hsl(var(--forest-deep));
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-1px);
+  }
+  
+  .btn-outline-nature {
+    background: transparent;
+    color: hsl(var(--forest-medium));
+    border: 1px solid hsl(var(--forest-medium));
+    transition: all 0.3s ease;
+  }
+  
+  .btn-outline-nature:hover {
+    background: hsl(var(--forest-medium));
+    color: hsl(var(--cream));
+  }
+  
+  /* Animations */
+  .fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
