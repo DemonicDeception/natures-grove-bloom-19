@@ -4,8 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Star, ShoppingCart } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { featuredProducts } from "@/data/products";
+import { useCart } from "@/contexts/CartContext";
 
 const Products = () => {
+  const { addToCart } = useCart();
 
   return (
     <div className="min-h-screen">
@@ -118,7 +120,16 @@ const Products = () => {
 
                       {/* Action Buttons */}
                       <div className="flex gap-2">
-                        <Button className="flex-1 btn-nature" size="sm">
+                        <Button 
+                          className="flex-1 btn-nature" 
+                          size="sm"
+                          onClick={() => addToCart({
+                            id: product.id.toString(),
+                            name: product.name,
+                            price: product.price,
+                            image: product.image
+                          })}
+                        >
                           <ShoppingCart className="h-4 w-4 mr-2" />
                           Add to Cart
                         </Button>

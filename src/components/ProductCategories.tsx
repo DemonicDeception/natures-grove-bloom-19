@@ -2,14 +2,22 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Sparkles, Leaf, Brain, Star, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const ProductCategories = () => {
+  const { addToCart } = useCart();
+
   const categories = [
     {
       icon: Heart,
       title: "Health & Wellness",
       description: "Natural supplements and herbal remedies to support your overall health and vitality.",
-      products: ["Immune Boosters", "Energy Blends", "Digestive Support", "Sleep Aids"],
+      products: [
+        { id: "immune-booster", name: "Immune Booster", price: 29.99 },
+        { id: "energy-blend", name: "Energy Blend", price: 24.99 },
+        { id: "digestive-support", name: "Digestive Support", price: 19.99 },
+        { id: "sleep-aid", name: "Sleep Aid", price: 22.99 }
+      ],
       color: "text-forest-medium",
       bgColor: "bg-forest-medium/10"
     },
@@ -17,7 +25,12 @@ const ProductCategories = () => {
       icon: Sparkles,
       title: "Skincare & Beauty",
       description: "Organic skincare solutions that nourish and rejuvenate your skin naturally.",
-      products: ["Face Serums", "Body Oils", "Cleansers", "Anti-aging Creams"],
+      products: [
+        { id: "face-serum", name: "Face Serum", price: 45.99 },
+        { id: "body-oil", name: "Body Oil", price: 32.99 },
+        { id: "cleanser", name: "Cleanser", price: 18.99 },
+        { id: "anti-aging-cream", name: "Anti-aging Cream", price: 56.99 }
+      ],
       color: "text-sage",
       bgColor: "bg-sage/10"
     },
@@ -25,7 +38,12 @@ const ProductCategories = () => {
       icon: Brain,
       title: "Mental Wellness",
       description: "Calming herbs and adaptogens to support emotional balance and mental clarity.",
-      products: ["Stress Relief", "Focus Blends", "Mood Support", "Meditation Aids"],
+      products: [
+        { id: "stress-relief", name: "Stress Relief", price: 27.99 },
+        { id: "focus-blend", name: "Focus Blend", price: 31.99 },
+        { id: "mood-support", name: "Mood Support", price: 25.99 },
+        { id: "meditation-aid", name: "Meditation Aid", price: 20.99 }
+      ],
       color: "text-moss",
       bgColor: "bg-moss/10"
     },
@@ -33,7 +51,12 @@ const ProductCategories = () => {
       icon: Leaf,
       title: "Healing Herbs",
       description: "Traditional medicinal plants and herbal preparations for natural healing.",
-      products: ["Pain Relief", "Inflammation Support", "Recovery Blends", "Detox Teas"],
+      products: [
+        { id: "pain-relief", name: "Pain Relief", price: 33.99 },
+        { id: "inflammation-support", name: "Inflammation Support", price: 28.99 },
+        { id: "recovery-blend", name: "Recovery Blend", price: 35.99 },
+        { id: "detox-tea", name: "Detox Tea", price: 16.99 }
+      ],
       color: "text-earth",
       bgColor: "bg-earth/10"
     }
@@ -74,14 +97,29 @@ const ProductCategories = () => {
                       <p className="font-body text-muted-foreground mb-4 text-sm">
                         {category.description}
                       </p>
-                      <div className="flex flex-wrap gap-1 justify-center mb-4">
+                      <div className="space-y-2 mb-4">
                         {category.products.map((product, productIndex) => (
-                          <span
+                          <div
                             key={productIndex}
-                            className="inline-block bg-secondary text-secondary-foreground px-2 py-1 rounded-full text-xs font-body"
+                            className="flex items-center justify-between p-2 bg-background/50 rounded-lg"
                           >
-                            {product}
-                          </span>
+                            <div className="flex-1">
+                              <span className="font-body text-sm font-medium text-foreground">
+                                {product.name}
+                              </span>
+                              <span className="text-xs text-muted-foreground ml-2">
+                                ${product.price}
+                              </span>
+                            </div>
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => addToCart(product)}
+                              className="h-8 w-8 p-0 hover:bg-primary/10"
+                            >
+                              <ShoppingCart className="h-3 w-3" />
+                            </Button>
+                          </div>
                         ))}
                       </div>
                       <Button 

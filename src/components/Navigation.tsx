@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Leaf } from "lucide-react";
+import { Menu, X, Leaf, User, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { CartSheet } from "./CartSheet";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -36,9 +40,31 @@ const Navigation = () => {
                 {item.name}
               </a>
             ))}
-            <Button className="btn-nature rounded-full px-6">
-              Shop Now
-            </Button>
+            <div className="flex items-center space-x-4">
+              <CartSheet />
+              {user ? (
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-muted-foreground">
+                    Welcome, {user.email?.split('@')[0]}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={signOut}
+                    className="text-muted-foreground hover:text-destructive"
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </Button>
+                </div>
+              ) : (
+                <Link to="/auth">
+                  <Button variant="outline" size="sm">
+                    <User className="h-4 w-4 mr-2" />
+                    Sign In
+                  </Button>
+                </Link>
+              )}
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -72,9 +98,31 @@ const Navigation = () => {
                   {item.name}
                 </a>
               ))}
-              <Button className="btn-nature rounded-full mx-2 mt-4">
-                Shop Now
-              </Button>
+              <div className="flex items-center justify-between px-2 mt-4">
+                <CartSheet />
+                {user ? (
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-muted-foreground">
+                      {user.email?.split('@')[0]}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={signOut}
+                      className="text-muted-foreground hover:text-destructive"
+                    >
+                      <LogOut className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="outline" size="sm">
+                      <User className="h-4 w-4 mr-2" />
+                      Sign In
+                    </Button>
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         )}
