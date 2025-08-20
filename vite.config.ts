@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-   //base: '/natures-grove-bloom-19/', 👈 THIS is required for GitHub Pages
+   base: '/natures-grove-bloom-19/', //👈 THIS is required for GitHub Pages
 
   server: {
     host: "::",
