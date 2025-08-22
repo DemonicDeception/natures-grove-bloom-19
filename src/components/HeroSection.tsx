@@ -40,17 +40,21 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg" className="btn-nature rounded-full px-8 py-3 text-base font-medium group">
-              Explore Products
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="btn-outline-nature rounded-full px-8 py-3 text-base font-medium bg-cream/10 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-forest-deep"
-            >
-              Read Our Blog
-            </Button>
+            <a href="/products">
+              <Button size="lg" className="btn-nature rounded-full px-8 py-3 text-base font-medium group">
+                Explore Products
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </a>
+            <a href="#blog">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="btn-outline-nature rounded-full px-8 py-3 text-base font-medium bg-cream/10 backdrop-blur-sm border-cream/30 text-cream hover:bg-cream hover:text-forest-deep"
+              >
+                Read Our Blog
+              </Button>
+            </a>
           </div>
 
           {/* Features */}

@@ -114,6 +114,39 @@ const BlogSection = () => {
             </Button>
           </div>
         </div>
+
+        {/* Contact Section */}
+        <section id="contact" className="mt-20 bg-gradient-card rounded-2xl p-8 md:p-12 text-center">
+          <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-4">
+            Get in Touch
+          </h3>
+          <p className="font-body text-muted-foreground mb-8 max-w-lg mx-auto">
+            Have questions about our products or need personalized wellness guidance? We're here to help!
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-forest-light/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                📧
+              </div>
+              <h4 className="font-heading font-semibold text-foreground mb-1">Email</h4>
+              <p className="font-body text-sm text-muted-foreground">hello@naturesgrove.com</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-forest-light/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                📞
+              </div>
+              <h4 className="font-heading font-semibold text-foreground mb-1">Phone</h4>
+              <p className="font-body text-sm text-muted-foreground">1-800-NATURE-1</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-forest-light/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                📍
+              </div>
+              <h4 className="font-heading font-semibold text-foreground mb-1">Location</h4>
+              <p className="font-body text-sm text-muted-foreground">Portland, Oregon</p>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
   );

@@ -17,6 +17,19 @@ const Navigation = () => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const handleNavClick = (href: string) => {
+    if (href.startsWith('#')) {
+      // Scroll to section on same page
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to different page
+      window.location.href = href;
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,13 +45,13 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={() => handleNavClick(item.href)}
                 className="font-body text-sm font-medium text-muted-foreground hover:text-forest-medium transition-colors duration-200"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
             <div className="flex items-center space-x-4">
               <CartSheet />
@@ -89,14 +102,16 @@ const Navigation = () => {
           <div className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="font-body text-sm font-medium text-muted-foreground hover:text-forest-medium transition-colors duration-200 px-2 py-1"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    handleNavClick(item.href);
+                    setIsMenuOpen(false);
+                  }}
+                  className="font-body text-sm font-medium text-muted-foreground hover:text-forest-medium transition-colors duration-200 px-2 py-1 text-left"
                 >
                   {item.name}
-                </a>
+                </button>
               ))}
               <div className="flex items-center justify-between px-2 mt-4">
                 <CartSheet />
