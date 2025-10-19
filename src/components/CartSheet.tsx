@@ -10,6 +10,9 @@ import {
 } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/contexts/CartContext';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 export function CartSheet() {
   const { 
@@ -21,9 +24,45 @@ export function CartSheet() {
     getTotalItems, 
     getTotalPrice 
   } = useCart();
+  const { toast } = useToast();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   const totalItems = getTotalItems();
   const totalPrice = getTotalPrice();
+
+  const handleCheckout = async () => {
+    setIsCheckingOut(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: "Error",
+          description: "Please sign in to checkout",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+        body: { items },
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast({
+        title: "Checkout failed",
+        description: "Unable to process checkout. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   return (
     <Sheet>
@@ -124,8 +163,12 @@ export function CartSheet() {
                   >
                     Clear Cart
                   </Button>
-                  <Button className="flex-1">
-                    Checkout
+                  <Button 
+                    className="flex-1"
+                    onClick={handleCheckout}
+                    disabled={isCheckingOut}
+                  >
+                    {isCheckingOut ? 'Processing...' : 'Checkout'}
                   </Button>
                 </div>
               </div>
