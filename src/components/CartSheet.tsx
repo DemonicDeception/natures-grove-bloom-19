@@ -44,7 +44,10 @@ export function CartSheet() {
       }
 
       const { data, error } = await supabase.functions.invoke('create-checkout-session', {
-        body: { items },
+        body: { 
+          items,
+          origin: window.location.origin 
+        },
       });
 
       if (error) throw error;

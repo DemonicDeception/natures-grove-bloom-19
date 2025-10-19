@@ -21,7 +21,7 @@ serve(async (req) => {
       apiVersion: '2023-10-16',
     });
 
-    const { items } = await req.json();
+    const { items, origin } = await req.json();
 
     const line_items = items.map((item: any) => ({
       price_data: {
@@ -38,8 +38,8 @@ serve(async (req) => {
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: 'payment',
-      success_url: `${req.headers.get('origin')}/checkout-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.get('origin')}/`,
+      success_url: `${origin}/checkout-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/`,
     });
 
     return new Response(
