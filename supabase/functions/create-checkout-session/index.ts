@@ -23,17 +23,25 @@ serve(async (req) => {
 
     const { items, origin } = await req.json();
 
-    const line_items = items.map((item: any) => ({
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.product_name,
-          images: item.product_image ? [item.product_image] : [],
+    const line_items = items.map((item: any) => {
+      const productData: any = {
+        name: item.product_name,
+      };
+      
+      // Only add images if they are absolute URLs (Stripe requirement)
+      if (item.product_image && (item.product_image.startsWith('http://') || item.product_image.startsWith('https://'))) {
+        productData.images = [item.product_image];
+      }
+      
+      return {
+        price_data: {
+          currency: 'usd',
+          product_data: productData,
+          unit_amount: Math.round(item.product_price * 100),
         },
-        unit_amount: Math.round(item.product_price * 100),
-      },
-      quantity: item.quantity,
-    }));
+        quantity: item.quantity,
+      };
+    });
 
     const session = await stripe.checkout.sessions.create({
       line_items,
