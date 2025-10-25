@@ -1,5 +1,6 @@
 import { Heart, Sparkles, Leaf, Brain } from "lucide-react";
 import { Product } from "@/types/product";
+import testItemImage from "@/assets/test-item.jpeg";
 
 export const featuredProducts: Product[] = [
   {
@@ -121,5 +122,25 @@ export const featuredProducts: Product[] = [
     icon: Sparkles,
     color: "text-sage",
     bgColor: "bg-sage/10"
+  },
+  {
+    id: 7,
+    name: "Test Item",
+    category: "Health & Wellness",
+    description: "A delicious and nutritious test product for your wellness journey.",
+    price: 19.99,
+    rating: 4.7,
+    reviews: 45,
+    ingredients: ["Natural Ingredients", "Quality Tested", "Freshly Prepared"],
+    variants: [
+      { type: "Small", size: "Single Serving", price: 19.99 },
+      { type: "Medium", size: "2 Servings", price: 34.99 },
+      { type: "Large", size: "Family Pack", price: 54.99 }
+    ],
+    image: testItemImage,
+    badges: ["Organic", "Fresh"],
+    icon: Leaf,
+    color: "text-earth",
+    bgColor: "bg-earth/10"
   }
 ];
