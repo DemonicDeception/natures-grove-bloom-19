@@ -142,5 +142,25 @@ export const featuredProducts: Product[] = [
     icon: Leaf,
     color: "text-earth",
     bgColor: "bg-earth/10"
+  },
+  {
+    id: 8,
+    name: "Pain and Inflammation Salve",
+    category: "Healing Herbs",
+    description: "A therapeutic herbal salve formulated with turmeric, ginger, and CBD to naturally reduce pain and inflammation while promoting healing.",
+    price: 29.99,
+    rating: 4.8,
+    reviews: 142,
+    ingredients: ["Turmeric Extract", "Ginger Root", "CBD Oil", "Arnica Montana", "Menthol", "Beeswax"],
+    variants: [
+      { type: "Travel Size", size: "0.5 oz", price: 14.99 },
+      { type: "Standard Jar", size: "2 oz", price: 29.99 },
+      { type: "Large Jar", size: "4 oz", price: 49.99 }
+    ],
+    image: "/placeholder.svg",
+    badges: ["Organic", "CBD-Infused"],
+    icon: Leaf,
+    color: "text-earth",
+    bgColor: "bg-earth/10"
   }
 ];
