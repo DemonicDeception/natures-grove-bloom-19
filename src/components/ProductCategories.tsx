@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Sparkles, Leaf, Brain, Star, ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const ProductCategories = () => {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   const categories = [
     {
@@ -125,6 +127,7 @@ const ProductCategories = () => {
                       <Button 
                         variant="outline" 
                         size="sm"
+                        onClick={() => navigate('/products')}
                         className="btn-outline-nature group-hover:bg-forest-medium group-hover:text-cream group-hover:border-forest-medium transition-all duration-300"
                       >
                         Browse {category.title}
