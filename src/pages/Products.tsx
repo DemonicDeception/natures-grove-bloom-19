@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star, ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { featuredProducts } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
@@ -133,8 +134,10 @@ const Products = () => {
                           <ShoppingCart className="h-4 w-4 mr-2" />
                           Add to Cart
                         </Button>
-                        <Button variant="outline" className="btn-outline-nature" size="sm">
-                          View Details
+                        <Button variant="outline" className="btn-outline-nature" size="sm" asChild>
+                          <Link to={`/products/${product.id}`}>
+                            View Details
+                          </Link>
                         </Button>
                       </div>
                     </div>
